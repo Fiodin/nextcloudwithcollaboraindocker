@@ -99,7 +99,7 @@ Finally, adjust the conf to the reverse proxy. You have to add a `location` sect
         }
     }
 
-**Important
+**Important**
 
 - For `proxy_pass`, the same address including port must be specified as was previously used by Docker.
 - The official NGINX documentation states that the `if` rule for the redirect is not recommended. It is better to use the `return 301`. Therefore this has been commented out and added below.
