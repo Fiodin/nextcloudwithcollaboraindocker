@@ -2,16 +2,17 @@
 Installation of Collabora in Docker for Nextcloud
 
 # Collabora
-The internal Collabora server is not very powerful and quickly reaches its limits. On the other hand, it runs much more stable than OnlyOffice. Nevertheless, it was decided to install it outside the cloud by means of a ReverseProxy. This is the same as the installation of OnlyOffice.
+The internal Collabora server is not very powerful and quickly reaches its limits. On the other hand, it runs much more stable than OnlyOffice. Nevertheless, it was decided to install it outside the cloud by means of a ReverseProxy. This is the same as the [installation of OnlyOffice](https://github.com/Fiodin/nextcloudwithooindocker).
 
 ## Docker Image - Collabora
 Basically, a Docker image is simply installed as before. Just make sure that the ports are open and not the same as for Only Office:
-> docker run -i -t -d --name="codeserverCloud" -p 127.0.0.1:port:port \-e domain="sub\.domain\.endung" \-e username="unique_name" \-e password="secure_password" \--restart always \--cap-add MKNOD collabora/code
+> docker run -i -t -d --name="unique_name" -p 127.0.0.1:port:port \-e domain="sub\.domain\.endung" \-e username="unique_name" \-e password="secure_password" \--restart always \--cap-add MKNOD collabora/code
 
 **Important:**
 - *name* must be written in "".
 - A free local port must be used. This port must also be released in the firewall (e.g. `ufw`) and the router.
 - With the domain, care must be taken with the 2-fold \\ and set BEFORE the dots in each case.
+- The `password` should not include any quotations as `"` or `'`. Otherwise, Docker interprets this as the end of the string.
 
 If two clouds are to run with the same image, simply extend the domains:
 > -e domain="sub\.domain\\.ending|sub\.2tedomain\\.ending"
@@ -51,8 +52,8 @@ Finally, adjust the conf to the reverse proxy. You have to add a `location` sect
 
         listen [::]:443 ssl http2; # managed by Certbot
         listen 443 ssl http2; # managed by Certbot
-        ssl_certificate /etc/letsencrypt/live/weg.zum/fullchain.pem; # managed by Certbot
-        ssl_certificate_key /etc/letsencrypt/live/weg.zum/privkey.pem; # managed by Certbot
+        ssl_certificate /etc/letsencrypt/live/way.to/fullchain.pem; # managed by Certbot
+        ssl_certificate_key /etc/letsencrypt/live/way.to/privkey.pem; # managed by Certbot
         include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
         ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 
