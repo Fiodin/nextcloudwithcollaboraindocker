@@ -6,7 +6,7 @@ The internal Collabora server is not very powerful and quickly reaches its limit
 
 ## Docker Image - Collabora
 Basically, a Docker image is simply installed as before. Just make sure that the ports are open and not the same as for Only Office:
-> docker run -i -t -d --name="unique_name" -p 127.0.0.1:port:port \-e domain="sub\.domain\.endung" \-e username="unique_name" \-e password="secure_password" \--restart always \--cap-add MKNOD collabora/code
+> docker run -i -t -d -p 127.0.0.1:port:port -e "aliasgroup1=https://sub.domain.endung:443,https://sub.domain.endung" -e username="unique_name" -e password="secure_password" --restart always --name="unique_name" collabora/code
 
 **Important:**
 - *name* must be written in "".
